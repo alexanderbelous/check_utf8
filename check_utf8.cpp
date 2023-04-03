@@ -63,7 +63,7 @@ std::ptrdiff_t findFirstNonUTF8Sequence(std::istream& data)
         }
     }
     // So far so good.
-    byte_current += (1 + num_continuation_bytes);
+    offset += (1 + num_continuation_bytes);
   }
   return -1;
 }
@@ -87,7 +87,7 @@ int main(int argc, char** argv)
   const std::ptrdiff_t invalid_sequence_offset = findFirstNonUTF8Sequence(input);
   if (invalid_sequence_offset != -1)
   {
-    std::cout << "Not UTF-8 sequence found at position " << invalid_sequence_offset << std::endl;
+    std::cout << "Not UTF-8 sequence found at byte " << invalid_sequence_offset << std::endl;
     return -1;
   }
   std::cout << "The file is a valid UTF-8 text." << std::endl;
